@@ -16,14 +16,16 @@ class Request {
     }
     protected function parseRequest() {
         if ($this->method == 'PUT') {   // <-- Have to jump through hoops to get PUT data
-            $raw  = '';
-            $httpContent = fopen('php://input', 'r');
-            while ($kb = fread($httpContent, 1024)) {
-                $raw .= $kb;
-            }
-            fclose($httpContent);
-            $params = array();
-            parse_str($raw, $params);
+//             $raw  = '';
+//             $httpContent = fopen('php://input', 'r');
+//             while ($kb = fread($httpContent, 1024)) {
+//                 $raw .= $kb;
+//             }
+//             fclose($httpContent);
+//         	$params = array();
+//         	parse_str($raw, $params);
+        	$raw = file_get_contents('php://input');
+        	$params = json_decode($raw,TRUE);
 
             if (isset($params['data'])) {
                 $this->params =  json_decode(stripslashes($params['data']));
@@ -33,17 +35,18 @@ class Request {
             }
         } else {
             // grab JSON data if there...
-            $this->params = (isset($_REQUEST['data'])) ? json_decode(stripslashes($_REQUEST['data'])) : null;
+//             $this->params = (isset($_REQUEST['data'])) ? json_decode(stripslashes($_REQUEST['data'])) : null;
 
             if (isset($_REQUEST['data'])) {
                 $this->params =  json_decode(stripslashes($_REQUEST['data']));
             } else {
-                $raw  = '';
-                $httpContent = fopen('php://input', 'r');
-                while ($kb = fread($httpContent, 1024)) {
-                    $raw .= $kb;
-                }
-                $params = json_decode(stripslashes($raw));
+//                 $raw  = '';
+//                 $httpContent = fopen('php://input', 'r');
+//                 while ($kb = fread($httpContent, 1024)) {
+//                     $raw .= $kb;
+//                 }
+       			$raw = file_get_contents('php://input');
+            	$params = json_decode(stripslashes($raw));
                 if ($params) {
                     $this->params = $params;
                 }

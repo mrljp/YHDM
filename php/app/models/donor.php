@@ -3,6 +3,7 @@
  * @class Donor
  */
 class Donor extends Model {
-	static		$db_table = 'donors';
+	static		$db_table = 'donors', 
+				$pk = 'id';
 
 }

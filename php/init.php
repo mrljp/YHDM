@@ -1,8 +1,5 @@
 <?php
     // base framework
-    require(dirname(__FILE__).'/lib/PhpConsole.php');
-    PhpConsole::start();
-    
     session_start();
 
     require(dirname(__FILE__).'/lib/database.php');

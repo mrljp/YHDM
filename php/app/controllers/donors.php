@@ -12,8 +12,7 @@ class Donors extends ApplicationController {
         $res = new Response();
         $res->success = true;
         $res->message = "Loaded data";
-        $t = Donor::getTable();
-        $res->data = Donor::all($t);
+		$res->data = Donor::all();
         return $res->to_json();
     }
     /**

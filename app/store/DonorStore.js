@@ -34,7 +34,7 @@ Ext.define('YHDM.store.DonorStore', {
             } else {
                 verb = name + 'd';
             }
-            Ext.example.msg(name, Ext.String.format("{0} user: {1}", verb, record.getId()));
+            // Ext.example.msg(name, Ext.String.format("{0} user: {1}", verb, record.getId()));
             
         }
     },

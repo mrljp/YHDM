@@ -5,11 +5,13 @@
  */
 class Model {
     public $id, $attributes;
+    
     static function create($params) {
         $obj = new self(get_object_vars($params));
         $obj->save();
         return $obj;
     }
+    
     static function find($id) {
         global $dbh;
         $found = null;
@@ -23,6 +25,7 @@ class Model {
     }
     static function update($id, $params) {
         global $dbh;
+        /*
         $rec = self::find($id);
 
         if ($rec == null) {
@@ -37,6 +40,19 @@ class Model {
                 break;
             }
         }
+        */
+        $t = static::$db_table;
+        // convert $params to array if needed
+        if (is_object($params)) {
+        	foreach ($params as $key => $value) {
+        		$a[$key] = $value;
+        	}
+        }
+        elseif (is_array($params))
+        	$a = $params;
+        else
+        	$a = array();
+        $rec = $dbh->update($t, $a, array('id'=>$id));
         return $rec;
     }
     static function destroy($id) {
@@ -51,10 +67,11 @@ class Model {
         }
         return $rec;
     }
-    static function all($table) {
+    static function all() {
         global $dbh;
-        //return $dbh->rs();
-        return ($dbh->select($table) ? $dbh->getResult() : null);
+        $t = static::$db_table;
+        
+        return ($dbh->select($t) ? $dbh->getResult() : null);
     }
 
     public function __construct($params) {
@@ -69,9 +86,5 @@ class Model {
     public function to_hash() {
         return $this->attributes;
     }
-    
-	static function getTable() {
-		return (self::$db_table);
-	}
 }
 

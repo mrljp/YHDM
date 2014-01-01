@@ -70,7 +70,8 @@ class Database
 			$stmt = $this->dbh->prepare($q);
 			if ($stmt->execute())
 			{
-				$this->result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$rec = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$this->result = $rec[0]; 
 				return true;
 			}
 		}
@@ -91,7 +92,6 @@ class Database
 				$values = quoteArray($values);
 				$valueList = implode(',', $values);
 				$s .= ' VALUES (' . $valueList . ')';
-	debug('Insert: ' . $s);
 				$stmt = $this->dbh->prepare($s);
 				return ($stmt->execute());
 			} catch(PDOException $e) {
@@ -126,8 +126,11 @@ class Database
 			cols = array where key is column name and value is new value
 			where = array where key is column name and value is value to match
 		*/
-		if ($this->tableExists($table))
+		try
 		{
+			if (!$this->tableExists($table))
+				throw new \Exception("No table found"); 
+
 			// combine WHERE clause into single string
 			$where = quoteArray($where);
 			$t = array();
@@ -146,11 +149,19 @@ class Database
 			
 			// create query
 			$update = 'UPDATE ' . $table . ' SET ' . $c . ' WHERE ' . $w;
-		debug('Update: ' . $update);
 			$stmt = $this->dbh->prepare($update);
-			return ($stmt->execute());
+			if(!$stmt->execute())
+				throw new Exception('Unable to update: ' . $stmt->errorCode());
+			if ($this->select($table, '*', $w))
+				return $this->result;
+			else 
+				throw new \Exception("Did not update");
 		}
-		return false;
+		catch (Exception $e)
+		{
+			echo "Exception: " . $e;
+			return null;
+		}
 	}
 
 	public function listTable($table, $sort)
@@ -170,7 +181,6 @@ class Database
 
 	public function runTest()
 	{
-		debug('Start test');
 
 		/*
 		$a = array('id' => 2, 'name' => 'Paul', 'email' => 'Mary');
@@ -206,7 +216,6 @@ class Database
 		echo '</br>';
 
 		$this->disconnect();
-		debug('Test complete');
 	}
 
 }
