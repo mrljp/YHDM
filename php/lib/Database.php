@@ -71,7 +71,7 @@ class Database
 			if ($stmt->execute())
 			{
 				$rec = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				$this->result = $rec[0]; 
+				$this->result = $rec; 
 				return true;
 			}
 		}

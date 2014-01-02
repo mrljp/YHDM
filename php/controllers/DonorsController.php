@@ -17,7 +17,7 @@ class DonorsController extends BaseController
         $res->success = true;
         $res->message = "Loaded data";
         $res->data = DonorModel::all();
-        return $res->to_json();
+        return $res;
     }
 
     /**
@@ -34,7 +34,7 @@ class DonorsController extends BaseController
         } else {
             $res->message = "Failed to create Donor";
         }
-        return $res->to_json();
+        return $res;
     }
 
     /**
@@ -51,7 +51,7 @@ class DonorsController extends BaseController
         } else {
             $res->message = "Failed to find that Donor";
         }
-        return $res->to_json();
+        return $res;
     }
 
     /**
@@ -66,7 +66,7 @@ class DonorsController extends BaseController
         } else {
             $res->message = "Failed to destroy Donor";
         }
-        return $res->to_json();
+        return $res;
     }
 }
 

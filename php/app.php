@@ -9,6 +9,11 @@ $controller_name = ucfirst($request->controller) . 'Controller';
 if (class_exists($controller_name)) {
     $controller = new $controller_name();
     $result = $controller->dispatch($request);
-    print_r($result);
+    
+    $view_name = ucfirst($request->format) . 'View';
+    if(class_exists($view_name)) {
+        $view = new $view_name();
+        $view->render($result);
+    }
 }
 
