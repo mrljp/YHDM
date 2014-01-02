@@ -3,7 +3,7 @@ Ext.define('YHDM.view.donor.List', {
 	alias		: 'widget.donorlist',
 	
 	xtype	: 'gridpanel',
-	title	: 'Select Donor',
+	title	: 'Donors',
 	store	: 'DonorStore',
 	columns	: [
 		{
@@ -15,6 +15,11 @@ Ext.define('YHDM.view.donor.List', {
 			xtype		: 'gridcolumn',
 			dataIndex	: 'firstName',
 			text		: 'First Name'
+		},
+		{
+			xtype		: 'gridcolumn',
+			dataIndex	: 'secondName',
+			text		: 'Second Name'
 		}
 	],
 	

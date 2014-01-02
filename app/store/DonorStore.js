@@ -15,7 +15,8 @@ Ext.define('YHDM.store.DonorStore', {
         url     : 'php/app.php/donors',
         reader: {
             type: 'json',
-            root: 'data'
+            root: 'data',
+            successProperty: 'success'
         },
         writer: {
             type: 'json'

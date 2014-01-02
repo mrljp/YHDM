@@ -4,7 +4,7 @@ Ext.define('YHDM.view.Viewport', {
     
 	layout: {
 		align: 'stretch',
-		type: 'fit'
+		type: 'auto'
 	},
     items       : [
         {
