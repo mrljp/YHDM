@@ -1,26 +1,32 @@
 <?php
+
 /**
  * @class Donors
  * A simple application controller extension
  */
-class Donors extends ApplicationController {
+class DonorsController extends BaseController
+{
+
     /**
      * view
      * Retrieves rows from database.
      */
-    public function view() {
+    public function view()
+    {
         $res = new Response();
         $res->success = true;
         $res->message = "Loaded data";
-		$res->data = Donor::all();
+        $res->data = DonorModel::all();
         return $res->to_json();
     }
+
     /**
      * create
      */
-    public function create() {
+    public function create()
+    {
         $res = new Response();
-        $rec = Donor::create($this->params);
+        $rec = DonorModel::create($this->params);
         if ($rec) {
             $res->success = true;
             $res->message = "Created new Donor" . $rec->id;
@@ -30,12 +36,14 @@ class Donors extends ApplicationController {
         }
         return $res->to_json();
     }
+
     /**
      * update
      */
-    public function update() {
+    public function update()
+    {
         $res = new Response();
-        $rec = Donor::update($this->id, $this->params);
+        $rec = DonorModel::update($this->id, $this->params);
         if ($rec) {
             $res->data = $rec->to_hash();
             $res->success = true;
@@ -45,12 +53,14 @@ class Donors extends ApplicationController {
         }
         return $res->to_json();
     }
+
     /**
      * destroy
      */
-    public function destroy() {
+    public function destroy()
+    {
         $res = new Response();
-        if (Donor::destroy($this->id)) {
+        if (DonorModel::destroy($this->id)) {
             $res->success = true;
             $res->message = 'Destroyed Donor ' . $this->id;
         } else {

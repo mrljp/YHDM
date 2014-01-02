@@ -1,8 +1,8 @@
 <?php
 /**
- * @class Donor
+ * @class DonorModel
  */
-class Donor extends Model {
+class DonorModel extends BaseModel {
 	static		$db_table = 'donors', 
 				$pk = 'id';
 

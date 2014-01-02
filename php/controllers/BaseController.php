@@ -1,19 +1,23 @@
 <?php
+
 /**
- * @class ApplicationController
+ * @class BaseController
  */
-class ApplicationController {
+class BaseController
+{
+
     public $request, $id, $params;
 
     /**
      * dispatch
      * Dispatch request to appropriate controller-action by convention according to the HTTP method.
      */
-    public function dispatch($request) {
+    public function dispatch($request)
+    {
         $this->request = $request;
         $this->id = $request->id;
         $this->params = $request->params;
-
+        
         if ($request->isRestful()) {
             return $this->dispatchRestful();
         }
@@ -22,8 +26,9 @@ class ApplicationController {
         }
     }
 
-    protected function dispatchRestful() {
-		switch ($this->request->method) {
+    protected function dispatchRestful()
+    {
+        switch ($this->request->method) {
             case 'GET':
                 return $this->view();
                 break;

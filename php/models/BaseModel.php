@@ -1,9 +1,9 @@
 <?php
 /**
- * @class Model
+ * @class BaseModel
  * Baseclass for Models in this imaginary ORM
  */
-class Model {
+class BaseModel {
     public $id, $attributes;
     
     static function create($params) {

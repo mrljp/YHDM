@@ -1,13 +1,14 @@
 <?php
-    require('init.php');
+require ('init.php');
 
-    // Get Request
-    $request = new Request(array('restful' => true));
+// Get Request (for now, assume RESTful)
+$request = new Request(array('restful' => true));
 
-    // Get Controller
-    require(dirname(__FILE__).'/app/controllers/' . $request->controller . '.php');
-    $controller_name = ucfirst($request->controller);
-    $controller = new $controller_name;
-    // Dispatch request
-    echo $controller->dispatch($request);
+// route the request to the right place
+$controller_name = ucfirst($request->controller) . 'Controller';
+if (class_exists($controller_name)) {
+    $controller = new $controller_name();
+    $result = $controller->dispatch($request);
+    print_r($result);
+}
 
