@@ -79,23 +79,35 @@ Ext.define('YHDM.view.donor.List', {
 
 	addNewDonor : function addNewDonor(button) {
 		console.log('New donor requested');
-		var addForm = Ext.create('widget.donorform');
-		// get grid's store
-		store = button.up('gridpanel').store;
-		// Pop up new donor window
-		win = Ext.widget('window', {
-			title : 'Add a Donor',
-			closeAction : 'hide',
-			width : 400,
-			height : 400,
-			minWidth : 300,
-			minHeight : 300,
-			layout : 'fit',
-			resizable : true,
-			modal : true,
-			items : addForm,
-			defaultFocus : 'salutation'
-		});
-		win.show();
+		var addForm = button.up('donorManager').down('donorform');
+		var saveBtn = addForm.down('#savebutton');
+		// Set text for save button
+		saveBtn.setText('Save Donor');
+		
+		// Make form visible
+		addForm.reset();
+		addForm.show();
+		addForm.focus();
+		
+		// Change focus to form
+		
+//		var addForm = Ext.create('widget.donorform');
+//		// get grid's store
+//		store = button.up('gridpanel').store;
+//		// Pop up new donor window
+//		win = Ext.widget('window', {
+//			title : 'Add a Donor',
+//			closeAction : 'hide',
+//			width : 400,
+//			height : 400,
+//			minWidth : 300,
+//			minHeight : 300,
+//			layout : 'fit',
+//			resizable : true,
+//			modal : true,
+//			items : addForm,
+//			defaultFocus : 'salutation'
+//		});
+//		win.show();
 	}
 });

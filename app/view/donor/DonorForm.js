@@ -3,7 +3,7 @@ Ext.define('YHDM.view.donor.DonorForm', {
 	alias : 'widget.donorform',
 	xtype : 'contact-form',
 	store : 'DonorStore',
-	title : 'New Donor',
+	title : 'Donor Info',
 	frame : true,
 	width : 400,
 	layout : 'anchor',
@@ -49,6 +49,7 @@ Ext.define('YHDM.view.donor.DonorForm', {
 	} ],
 	buttons : [ {
 		// Save the new donor info
+		itemId : 'savebutton',
 		text : 'Add Donor',
 		handler : function() {
 			console.log('Add Donor pressed');

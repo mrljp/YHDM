@@ -2,12 +2,12 @@ Ext.define('YHDM.view.DonorManager', {
 	extend: 'Ext.panel.Panel',
 	requires: [
 	           'YHDM.view.donor.List',
-	           'YHDM.view.donor.DonorForm'
+	           'YHDM.view.donor.DonorForm',
+	           'YHDM.view.donation.DonationList'
 	           ],
 	alias	: 'widget.donorManager',
 	
 	frame: true,
-	height: 250,
 	layout: {
 		align: 'stretch',
 		type: 'hbox'
@@ -21,13 +21,28 @@ Ext.define('YHDM.view.DonorManager', {
 			items: [
 				{
 					xtype	: 'donorlist',
-					flex	: 1
+					flex	: 2
 				},
-//				{
-//					xtype	: 'donordetail',
-//					flex	: 2
-//				}
-				// donations section, flex 1
+				{
+					xtype	: 'panel',
+					flex	: 1,
+					layout	:
+						{
+							align : 'stretch',
+							type : 'vbox'
+						},
+					items	: [
+						{
+							xtype	: 'gridpanel',
+							flex	: 1,
+							columns : [{xtype:'gridcolumn', header:'test'}]
+						},
+						{
+							xtype	: 'donorform',
+							flex	: 1
+						}
+					]
+				}
 			]
 		});
 		
