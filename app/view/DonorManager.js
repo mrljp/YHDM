@@ -1,5 +1,9 @@
 Ext.define('YHDM.view.DonorManager', {
 	extend: 'Ext.panel.Panel',
+	requires: [
+	           'YHDM.view.donor.List',
+	           'YHDM.view.donor.DonorForm'
+	           ],
 	alias	: 'widget.donorManager',
 	
 	frame: true,
@@ -19,10 +23,10 @@ Ext.define('YHDM.view.DonorManager', {
 					xtype	: 'donorlist',
 					flex	: 1
 				},
-				{
-					xtype	: 'donordetail',
-					flex	: 2
-				}
+//				{
+//					xtype	: 'donordetail',
+//					flex	: 2
+//				}
 				// donations section, flex 1
 			]
 		});

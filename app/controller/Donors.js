@@ -6,6 +6,6 @@ Ext.define('YHDM.controller.Donors', {
 	
 	views:		[
 		'donor.List',
-		'donor.Detail'
+//		'donor.Detail'
 	]
 });

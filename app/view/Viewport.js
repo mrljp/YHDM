@@ -1,6 +1,8 @@
 Ext.define('YHDM.view.Viewport', {
-    //extend: 'YHDM.view.DonorManager',
     extend      : 'Ext.container.Viewport',
+    requires: [
+       'YHDM.view.DonorManager'
+    ],
     
 	layout: {
 		align: 'stretch',

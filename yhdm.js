@@ -5,8 +5,7 @@ Ext.Loader.setConfig({
 Ext.application({
     requires    : [
         'YHDM.view.DonorManager',
-        'YHDM.view.donor.List',
-        'YHDM.view.donor.Detail'
+        'YHDM.view.donor.List'
     ],
     
     models      : ['Donor'],

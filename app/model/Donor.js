@@ -3,7 +3,9 @@ Ext.define('YHDM.model.Donor', {
 
     fields: [
         {
-            name: 'id'
+            name: 'id',
+            type: 'int',
+            useNull: true
         },
         {
             name: 'firstName'
