@@ -30,84 +30,36 @@ Ext.define('YHDM.view.donor.List', {
 			} ],
 			dockedItems : [ {
 				xtype : 'toolbar',
-				items : [
-						{
-							text : 'Add',
-							iconCls : 'icon-add',
-							handler : this.addNewDonor,
-						},
-						'-',
-						{
-							itemId : 'delete',
-							text : 'Delete',
-							iconCls : 'icon-delete',
-							disabled : true,
-							handler : function() {
-								var grid = this.up('gridpanel');
-								var selection = grid.getView().getSelectionModel().getSelection()[0];
-								if (selection) {
-									grid.getStore().remove(selection);
-								}
-							}
-						} ]
+				items : [ {
+					text : 'Add New Donor',
+					glyph : '43@HeydingsCommonIconsRegular',
+					handler : this.onAddButton
+				} ]
 			} ],
 
 			listeners : {
-				itemclick : this.onClick,
-				itemdblclick : this.editDonor,
-				selectionchange : function(selModel, selections) {
-					// manage delete button availability
-					this.down('#delete').setDisabled(selections.length === 0);
-				}
+				selectionchange : this.onSelection
 			}
 		});
 		this.callParent(arguments);
 
 	},
 
-	onClick : function(me, record, item, index, e, eOpts) {
-		console.log('Donor selected: ' + record.get('salutation') + ' '
-				+ record.get('firstName') + ' ' + record.get('lastName'));
-		// Show list of donations made
+	onSelection : function(model, records) {
+		// populate form
+		console.log('selection changed');
+		var grid = this;
+		var form = grid.up('donorManager').down('donorform');
+		var record = records[0];
+		if (record) {
+			form.loadRecord(record);
+		}
 	},
 
-	editDonor : function(me, record, item, index, e, eOpts) {
-		console.log('edit requested');
-		console.log('Donor selected: ' + record.get('salutation') + ' '
-				+ record.get('firstName') + ' ' + record.get('lastName'));
-	},
-
-	addNewDonor : function addNewDonor(button) {
-		console.log('New donor requested');
-		var addForm = button.up('donorManager').down('donorform');
-		var saveBtn = addForm.down('#savebutton');
-		// Set text for save button
-		saveBtn.setText('Save Donor');
-		
-		// Make form visible
-		addForm.reset();
-		addForm.show();
-		addForm.focus();
-		
-		// Change focus to form
-		
-//		var addForm = Ext.create('widget.donorform');
-//		// get grid's store
-//		store = button.up('gridpanel').store;
-//		// Pop up new donor window
-//		win = Ext.widget('window', {
-//			title : 'Add a Donor',
-//			closeAction : 'hide',
-//			width : 400,
-//			height : 400,
-//			minWidth : 300,
-//			minHeight : 300,
-//			layout : 'fit',
-//			resizable : true,
-//			modal : true,
-//			items : addForm,
-//			defaultFocus : 'salutation'
-//		});
-//		win.show();
+	onAddButton : function() {
+		var form = this.up('donorManager').down('donorform');
+		var rec = new YHDM.model.Donor();
+		form.loadRecord(rec);
+		form.focus();
 	}
 });

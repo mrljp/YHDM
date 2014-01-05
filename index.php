@@ -5,9 +5,7 @@
     
     <!-- ExtJS -->
     <link rel="stylesheet" type="text/css"  href="vendor/extjs/resources/css/ext-all.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/example.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/restful.css" />
-
+    <link rel="stylesheet" type="text/css" href="resources/css/yhdm.css" />
     
     <!-- Application files -->
     <script type="text/javascript" src="vendor/extjs/ext-all-debug.js"></script>

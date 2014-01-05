@@ -33,23 +33,10 @@ Ext.define('YHDM.view.donation.DonationList', {
 //				items : [
 //						{
 //							text : 'Add',
-//							iconCls : 'icon-add',
-//							handler : this.addNewDonor,
-//						},
-//						'-',
-//						{
-//							itemId : 'delete',
-//							text : 'Delete',
-//							iconCls : 'icon-delete',
-//							disabled : true,
-//							handler : function() {
-//								var grid = this.up('gridpanel');
-//								var selection = grid.getView().getSelectionModel().getSelection()[0];
-//								if (selection) {
-//									grid.getStore().remove(selection);
-//								}
-//							}
-//						} ]
+//							glyph : '43@HeydingsCommonIconsRegular',
+//							handler : this.addNewDonor
+//						}
+//						]
 //			} ],
 //
 //			listeners : {

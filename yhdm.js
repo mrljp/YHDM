@@ -21,5 +21,6 @@ Ext.application({
     
     launch      : function() {
         console.log('Launch application');
+        Ext.setGlyphFontFamily('HeydingsCommonIconsRegular');
     }
 }); 
