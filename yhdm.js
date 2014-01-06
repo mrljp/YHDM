@@ -3,24 +3,23 @@ Ext.Loader.setConfig({
 });
 
 Ext.application({
-    requires    : [
-        'YHDM.view.DonorManager',
-        'YHDM.view.donor.List'
-    ],
-    
+//    requires    : [
+//        'YHDM.view.DonorManager',
+//        'YHDM.view.donor.List'
+//    ],
+//    
     models      : ['Donor'],
     
     controllers : ['Donors'],
     
-    stores      : ['DonorStore'],
+    stores      : ['Donors'],
 
-    autoCreateViewport: true,
     name        : 'YHDM',
     appFolder   : 'app',
 
-    
     launch      : function() {
         console.log('Launch application');
-        Ext.setGlyphFontFamily('HeydingsCommonIconsRegular');
-    }
+    },
+    
+	autoCreateViewport: true
 }); 

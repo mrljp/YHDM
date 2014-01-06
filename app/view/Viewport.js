@@ -2,36 +2,21 @@ Ext.define('YHDM.view.Viewport', {
 	extend : 'Ext.container.Viewport',
 	alias : 'widget.donormanager',
 
-	// requires: [
-	// 'YHDM.view.DonorManager'
-	// ],
-	//    
-	// layout: {
-	// align: 'stretch',
-	// type: 'auto'
-	// },
-	// items : [
-	// {
-	// xtype : 'donormanager'
-	// }
-	// ],
-	//    
-	// renderTo: Ext.getBody()
-	requires : [ 'YHDM.view.DonorManager', 
-	             'YHDM.view.Donor.List' ],
+	requires : [ 
+	        'YHDM.view.donor.List', 
+	        'YHDM.view.donor.Detail',
+			'Ext.layout.container.Border'
+	   ],
 
-	layout : {
-		align : 'stretch',
-		type : 'auto'
-	},
+	layout : 'border',
+
 	items : [ {
 		region : 'center',
-		xtype : 'donordetail'
+		xtype : 'donorlist'
 	}, {
-		region : 'west',
-		width : 0.50,
-		xtype : 'donormanager'
+		region : 'east',
+		width : '50%',
+		xtype : 'donordetail'
 	} ],
 
-	renderTo : Ext.getBody()
 });

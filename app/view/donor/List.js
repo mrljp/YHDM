@@ -1,65 +1,63 @@
 Ext.define('YHDM.view.donor.List', {
 	extend : 'Ext.grid.Panel',
 	alias : 'widget.donorlist',
-
-	xtype : 'gridpanel',
 	title : 'Donors',
+	margins : '5 0 5 5',
+//	layout : 'fit',
 
 	initComponent : function() {
+		console.log('init donor list component');
 		Ext.apply(this, {
-			store : 'DonorStore',
-			iconCls : 'icon-user',
+			store : 'Donors',
+
 			columns : [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'lastName',
 				header : 'Last Name',
-				flex : 1,
+//				flex : 1,
 				sortable : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'firstName',
 				header : 'First Name',
-				flex : 1,
+//				flex : 1,
 				sortable : false
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'secondName',
 				header : 'Second Name',
-				flex : 1,
+//				flex : 1,
 				sortable : false
 			} ],
+            listeners: {
+                selectionchange: this.onSelectionChange
+            },
 			dockedItems : [ {
 				xtype : 'toolbar',
+				dock : 'bottom',
 				items : [ {
 					text : 'Add New Donor',
 					glyph : '43@HeydingsCommonIconsRegular',
-					handler : this.onAddButton
-				} ]
-			} ],
-
-			listeners : {
-				selectionchange : this.onSelection
-			}
+					action : 'add'
+				}, {
+					text : 'Remove Donor',
+					glyph : '45@HeydingsCommonIconsRegular',
+					action : 'remove',
+					disabled : true
+				}, ]
+			} ]
 		});
 		this.callParent(arguments);
 
 	},
 
-	onSelection : function(model, records) {
-		// populate form
-		console.log('selection changed');
-		var grid = this;
-		var form = grid.up('donorManager').down('donorform');
-		var record = records[0];
-		if (record) {
-			form.loadRecord(record);
+	onSelectionChange : function(selmodel, selection) {
+		var selected = selection[0], 
+			button = this.down('button[action=remove]');
+		if (selected) {
+			button.enable();
+		} else {
+			button.disable();
 		}
-	},
-
-	onAddButton : function() {
-		var form = this.up('donorManager').down('donorform');
-		var rec = new YHDM.model.Donor();
-		form.loadRecord(rec);
-		form.focus();
 	}
 });
